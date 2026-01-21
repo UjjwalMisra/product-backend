@@ -1,13 +1,13 @@
 package com.example.product.controller;
 
-import com.example.product.model.Product;
-import com.example.product.service.ProductService;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
+import com.example.product.model.Product;
+import com.example.product.service.ProductService;
+
 @RestController
-@RequestMapping("/api/products")
+@RequestMapping("/products")
 public class ProductController {
 
     private final ProductService service;
@@ -15,14 +15,16 @@ public class ProductController {
     public ProductController(ProductService service) {
         this.service = service;
     }
-@GetMapping
-public List<Product> getAllProducts() {
-    return service.getAll();
-}
 
-@PostMapping
-public Product addProduct(@RequestBody Product product) {
-    return service.save(product);
-}
+    // GET all products
+    @GetMapping
+    public List<Product> getAllProducts() {
+        return service.getAll();
+    }
 
+    // POST new product
+    @PostMapping
+    public Product addProduct(@RequestBody Product product) {
+        return service.save(product);
+    }
 }
