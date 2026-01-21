@@ -15,15 +15,14 @@ public class ProductController {
     public ProductController(ProductService service) {
         this.service = service;
     }
+@GetMapping
+public List<Product> getAllProducts() {
+    return service.getAll();
+}
 
-    @GetMapping
-    public List<Product> getProducts() {
-        return service.getAllProducts();
-    }
+@PostMapping
+public Product addProduct(@RequestBody Product product) {
+    return service.save(product);
+}
 
-    @PostMapping
-    public String addProduct(@RequestBody Product product) {
-        service.addProduct(product);
-        return "Product added successfully";
-    }
 }

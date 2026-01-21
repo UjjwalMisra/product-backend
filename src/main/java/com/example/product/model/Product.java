@@ -1,20 +1,25 @@
 package com.example.product.model;
 
+import jakarta.persistence.*;
+
+@Entity
 public class Product {
 
-    private int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+
     private String name;
     private double price;
 
     public Product() {}
 
-    public Product(int id, String name, double price) {
-        this.id = id;
+    public Product(String name, double price) {
         this.name = name;
         this.price = price;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
