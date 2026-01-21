@@ -5,7 +5,6 @@ import java.util.List;
 
 import com.example.product.model.Product;
 import com.example.product.service.ProductService;
-
 @RestController
 @RequestMapping("/products")
 public class ProductController {
@@ -16,15 +15,13 @@ public class ProductController {
         this.service = service;
     }
 
-    // GET all products
     @GetMapping
     public List<Product> getAllProducts() {
-        return service.getAll();
+        return service.getAllProducts();   // FIXED
     }
 
-    // POST new product
     @PostMapping
-    public Product addProduct(@RequestBody Product product) {
-        return service.save(product);
+    public void addProduct(@RequestBody Product product) {
+        service.addProduct(product);       // FIXED
     }
 }

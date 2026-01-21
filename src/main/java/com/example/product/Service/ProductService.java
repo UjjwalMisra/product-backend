@@ -4,22 +4,22 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 import com.example.product.model.Product;
-import com.example.product.repository.ProductRepository;
+import com.example.product.repository.ProductJdbcRepository;
 
 @Service
 public class ProductService {
 
-    private final ProductRepository repository;
+    private final ProductJdbcRepository repository;
 
-    public ProductService(ProductRepository repository) {
+    public ProductService(ProductJdbcRepository repository) {
         this.repository = repository;
     }
 
-    public List<Product> getAll() {
+    public List<Product> getAllProducts() {
         return repository.findAll();
     }
 
-    public Product save(Product product) {
-        return repository.save(product);
+    public void addProduct(Product product) {
+        repository.save(product);
     }
 }
