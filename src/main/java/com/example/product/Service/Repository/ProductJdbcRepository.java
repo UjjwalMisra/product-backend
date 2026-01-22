@@ -26,9 +26,18 @@ public class ProductJdbcRepository {
             )
         );
     }
+    public Product findById(int id){
+        String sql = "SELECT * FROM product WHERE id = ?";
+        return jdbcTemplate.queryForObject(sql,(rs,rowNum) -> new Product(rs.getInt("id"),
+                rs.getString("name"),
+                rs.getDouble("price")
+        ),
+                id);
+    }
 
     public void save(Product product) {
         String sql = "INSERT INTO product(name, price) VALUES (?, ?)";
         jdbcTemplate.update(sql, product.getName(), product.getPrice());
     }
+
 }

@@ -22,4 +22,7 @@ public class ProductService {
     public void addProduct(Product product) {
         repository.save(product);
     }
+    public Product getProductById(int id){
+        return repository.findById(id);
+    }
 }

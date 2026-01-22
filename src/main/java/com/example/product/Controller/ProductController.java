@@ -24,4 +24,8 @@ public class ProductController {
     public void addProduct(@RequestBody Product product) {
         service.addProduct(product);       // FIXED
     }
+    @GetMapping("/{id}")
+    public Product getProductById(@PathVariable int id) {
+        return service.getProductById(id);
+    }
 }
