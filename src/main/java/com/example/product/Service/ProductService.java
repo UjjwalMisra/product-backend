@@ -18,6 +18,10 @@ public class ProductService {
     public List<Product> getAllProducts() {
         return repository.findAll();
     }
+    public List<Product> getProductsByCategory(String categoryName) {
+        return repository.findByCategoryName(categoryName);
+    }
+
 
     public void addProduct(Product product) {
         repository.save(product);

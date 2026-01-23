@@ -19,6 +19,13 @@ public class ProductController {
     public List<Product> getAllProducts() {
         return service.getAllProducts();   // FIXED
     }
+    @GetMapping("/category/{categoryName}")
+    public List<Product> getProductsByCategory(
+            @PathVariable String categoryName) {
+
+        return service.getProductsByCategory(categoryName);
+    }
+
 
     @PostMapping
     public void addProduct(@RequestBody Product product) {
