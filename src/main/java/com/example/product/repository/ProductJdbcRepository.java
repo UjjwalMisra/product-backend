@@ -16,7 +16,11 @@ public class ProductJdbcRepository {
     }
 
     public List<Product> findAll() {
-        String sql = "SELECT * FROM product";
+        String sql = """
+        SELECT p.id, p.name, p.price, p.category_id, c.name AS category_name
+        FROM product p
+        JOIN category c ON p.category_id = c.id
+    """;
 
         return jdbcTemplate.query(sql, (rs, rowNum) ->
                 new Product(
@@ -28,9 +32,15 @@ public class ProductJdbcRepository {
                 )
         );
     }
+
     public List<Product> findByCategoryName(String categoryName) {
 
-        String sql = "SELECT * FROM product WHERE category_name = ?";
+        String sql = """
+        SELECT p.id, p.name, p.price, p.category_id, c.name AS category_name
+        FROM product p
+        JOIN category c ON p.category_id = c.id
+        WHERE c.name = ?
+    """;
 
         return jdbcTemplate.query(
                 sql,
@@ -45,8 +55,15 @@ public class ProductJdbcRepository {
         );
     }
 
+
     public Product findById(int id) {
-        String sql = "SELECT * FROM product WHERE id = ?";
+
+        String sql = """
+        SELECT p.id, p.name, p.price, p.category_id, c.name AS category_name
+        FROM product p
+        JOIN category c ON p.category_id = c.id
+        WHERE p.id = ?
+    """;
 
         return jdbcTemplate.queryForObject(
                 sql,
@@ -62,18 +79,18 @@ public class ProductJdbcRepository {
     }
 
 
+
     public void save(Product product) {
         String sql = """
-        INSERT INTO product (name, price, category_id, category_name)
-        VALUES (?, ?, ?, ?)
+        INSERT INTO product (name, price, category_id)
+        VALUES (?, ?, ?)
     """;
 
         jdbcTemplate.update(
                 sql,
                 product.getName(),
                 product.getPrice(),
-                product.getCategoryId(),
-                product.getCategoryName()
+                product.getCategoryId()
         );
     }
 
