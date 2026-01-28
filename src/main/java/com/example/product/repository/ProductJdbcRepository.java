@@ -32,6 +32,17 @@ public class ProductJdbcRepository {
                 )
         );
     }
+    public String findCategoryByProductId(int productId) {
+        String sql = """
+        SELECT c.name
+        FROM product p
+        JOIN category c ON p.category_id = c.id
+        WHERE p.id = ?
+    """;
+
+        return jdbcTemplate.queryForObject(sql, String.class, productId);
+    }
+
 
     public List<Product> findByCategoryName(String categoryName) {
 
